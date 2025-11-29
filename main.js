@@ -4,7 +4,16 @@ const jumpButton = document.getElementById('jumpButton');
 const lifeCount = document.getElementById('life-count');
 const stoneCount = document.getElementById('stone-count');
 
+const jumpSound = new Audio('./sounds/jump.mp3');
+const failSound = new Audio('./sounds/fail.mp3');
+const applepaySound = new Audio('./sounds/applepay.mp3');
+const gameOverSound = new Audio('./sounds/game-over.mp3');
+const successSound = new Audio('./sounds/success.mp3');
+
 jumpButton.addEventListener('click', () => {
+    jumpSound.currentTime = 0; // чтобы звук срабатывал даже при частых нажатиях
+    jumpSound.play();
+
     if (rainbow.classList !== 'jump') {
         rainbow.classList.add('jump');
     }
@@ -28,6 +37,8 @@ let isAlive = setInterval(() => {
         lifeCount.textContent = `${lifeCountValue}`;
         startInvincibility();
 
+        failSound.play();
+
         isInvincible = true;
         setTimeout(() => {
             isInvincible = false;
@@ -35,6 +46,7 @@ let isAlive = setInterval(() => {
 
         if (lifeCountValue < 1) {
             setTimeout(() => {
+                gameOverSound.play();
                 reset('Game Over!');
             }, 50);
         }
@@ -44,9 +56,11 @@ let isAlive = setInterval(() => {
         if (canCountStone) {
             const stoneCountValue = parseInt(stoneCount.textContent) + 1;
             stoneCount.textContent = `${stoneCountValue}`;
+            applepaySound.play();
 
             if (stoneCountValue >= 10) {
                 setTimeout(() => {
+                    successSound.play();
                     reset('You are a Winner!');
                 }, 50);
             }
