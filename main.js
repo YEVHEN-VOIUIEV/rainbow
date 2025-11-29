@@ -11,7 +11,7 @@ jumpButton.addEventListener('click', () => {
     
     setTimeout(() => {
         rainbow.classList.remove('jump');
-    }, 1000);
+    }, 3000);
 });
 
 let isInvincible = false;

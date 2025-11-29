@@ -46,7 +46,7 @@
     position: relative;
     top: 260px;
     left: 580px;
-    animation: stoneMove 2s infinite linear;
+    animation: stoneMove 5s infinite linear;
 }
 
 @keyframes stoneMove {
@@ -60,7 +60,7 @@
 }
 
 .jump {
-    animation: jump 1s ease;
+    animation: jump 3s ease;
 }
 
 @keyframes jump {
@@ -69,7 +69,7 @@
     }
 
     50% {
-        top: 200px;
+        top: 150px;
     }
 
     100% {
