@@ -38,9 +38,9 @@
 }
 
 #stone {
-    width: 20px;
+    width: 40px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: 50%;
     border: 1px solid black;
     background-color: sienna;
     position: relative;
@@ -68,7 +68,7 @@
         top: 300px;
     }
 
-    50% {
+    20% {
         top: 150px;
     }
 

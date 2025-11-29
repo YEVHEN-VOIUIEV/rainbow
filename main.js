@@ -10,8 +10,18 @@ const applepaySound = new Audio('./sounds/applepay.mp3');
 const gameOverSound = new Audio('./sounds/game-over.mp3');
 const successSound = new Audio('./sounds/success.mp3');
 
-jumpButton.addEventListener('click', () => {
-    jumpSound.currentTime = 0; // чтобы звук срабатывал даже при частых нажатиях
+document.addEventListener("DOMContentLoaded", () => {
+    jumpSound.load();
+    failSound.load();
+    applepaySound.load();
+    gameOverSound.load();
+    successSound.load();
+});
+
+
+const jump = () => {
+    jumpSound.pause();
+    jumpSound.currentTime = 0;
     jumpSound.play();
 
     if (rainbow.classList !== 'jump') {
@@ -21,7 +31,10 @@ jumpButton.addEventListener('click', () => {
     setTimeout(() => {
         rainbow.classList.remove('jump');
     }, 3000);
-});
+};
+
+jumpButton.addEventListener('click', jump);
+document.addEventListener('keydown', jump);
 
 let isInvincible = false;
 let canCountStone = true;
@@ -47,7 +60,7 @@ let isAlive = setInterval(() => {
         if (lifeCountValue < 1) {
             setTimeout(() => {
                 gameOverSound.play();
-                reset('Game Over!');
+                reset();
             }, 50);
         }
 
@@ -61,7 +74,7 @@ let isAlive = setInterval(() => {
             if (stoneCountValue >= 10) {
                 setTimeout(() => {
                     successSound.play();
-                    reset('You are a Winner!');
+                    reset();
                 }, 50);
             }
 
@@ -73,8 +86,7 @@ let isAlive = setInterval(() => {
     }
 }, 10);
 
-function reset(text) {
-    alert(text);
+function reset() {
     lifeCount.textContent = '3';
     stoneCount.textContent = '0';
 }
@@ -86,7 +98,7 @@ function startInvincibility() {
     const blinkInterval = setInterval(() => {
         rainbow.style.opacity = (rainbow.style.opacity === "0.2" ? "1" : "0.2");
         blink++;
-        if (blink > 10) { // 10 миганий = ~1 секунда
+        if (blink > 10) {
             clearInterval(blinkInterval);
             rainbow.style.opacity = "1";
             isInvincible = false;
